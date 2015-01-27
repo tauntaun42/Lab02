@@ -13,7 +13,7 @@ protected:
 	bool _eof;
 	bool closed;
 	
-public: //dem functions doe
+public:
 	ReadFile* createReadFile(const char* file_name)
 	{
 		ReadFile* rf = new ReadFile;
