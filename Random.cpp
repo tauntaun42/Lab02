@@ -3,8 +3,6 @@
 #include <time.h>
 #include <stdlib.h>
 
-//THIS IS A COMMENT YES HELLO
-
 Random::Random()
 {
    randomInit();

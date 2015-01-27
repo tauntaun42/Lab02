@@ -13,7 +13,7 @@ protected:
 	bool _eof;
 	bool closed;
 	
-public:
+public: //dem functions doe
 	ReadFile* createReadFile(const char* file_name)
 	{
 		ReadFile* rf = new ReadFile;
@@ -47,6 +47,7 @@ public:
 	{
 	   return rf->_eof;
 	}
+	
 	void close(ReadFile* rf)
 	{
 	   if (!rf->closed)
