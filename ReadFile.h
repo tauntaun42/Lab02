@@ -55,6 +55,6 @@ public:
 		  rf->closed = true;
 	   }
 	}
-}
+};
 
 #endif
