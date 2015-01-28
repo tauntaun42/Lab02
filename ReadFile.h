@@ -8,7 +8,7 @@ using namespace std;
 
 class ReadFile{
 
-protected:
+private:
 	ifstream input_file;
 	bool _eof;
 	bool closed;
