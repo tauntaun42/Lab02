@@ -9,14 +9,14 @@ int main()
    ReadFile* rf = new ReadFile("cds.txt");
    WriteFile* wf = new WriteFile("out.txt");
 
-   while(!rf->eof())
+   while(!rf->eof(rf))
    {
-      String* line = rf->readLine();
+      String* line = rf->readLine(rf);
       wf->writeLine(line);
       delete line;
    }
 
-   rf->close();
+   rf->close(rf);
    wf->close();
    delete rf;
    delete wf;

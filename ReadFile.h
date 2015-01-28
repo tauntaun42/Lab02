@@ -4,6 +4,7 @@
 #include "Text.h"
 
 #include <fstream>
+#include <string>
 using namespace std;
 
 class ReadFile{
@@ -14,15 +15,13 @@ private:
 	bool closed;
 	
 public:
-	ReadFile* createReadFile(const char* file_name)
+	ReadFile(const char* file_name)
 	{
-		ReadFile* rf = new ReadFile;
+		ReadFile* rf;
 
 		rf->input_file.open(file_name);
 		rf->closed = false;
 		rf->_eof = false;
-		
-		return rf;
 	}
 	
 	void destroyReadFile(ReadFile* rf)
