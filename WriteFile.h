@@ -13,47 +13,36 @@ class WriteFile
 		bool closed;
 		
 	public:
-	ReadFile* createReadFile(const char* file_name)
-{
-   ReadFile* rf = new ReadFile;
-
-   rf->input_file.open(file_name);
-   rf->closed = false;
-   rf->_eof = false;
-
-   return rf;
-}
-
-	void destroyReadFile(ReadFile* rf)
+	WriteFile* createWriteFile(const char* file_name)
 	{
-		close(rf);
-		delete rf;
+		WriteFile* wf = new WriteFile;
+		wf->output_file.open(file_name);
+		wf->closed = false;
+		return wf;
 	}
 
-	bool eof(ReadFile* rf)
+	void destroyWriteFile(WriteFile* wf)
 	{
-		return rf->_eof;
+		close(wf);
+		delete wf;
 	}
 
-	void close(ReadFile* rf)
+	void close(WriteFile* wf)
 	{
-	if (!rf->closed)
+		if (!wf->closed)
 		{
-			rf->input_file.close();
-			rf->closed = true;
+			wf->output_file.close();
+			wf->closed = true;
 		}
 	}
 
-	String* readLine(ReadFile* rf)
+	void writeLine(WriteFile* wf, String* line)
 	{
-		if (rf->closed) return NULL;
-		if (rf->_eof) return NULL;
+		if (!wf->closed && line->length() > 0)
+			{
+			wf->output_file << line->getText() << endl;
+			}
 
-		string text;
-		rf->_eof = !(getline(rf->input_file, text));
-
-		String* str = new String((const char*) text.c_str());
-		return str;
 	}
 };
 
