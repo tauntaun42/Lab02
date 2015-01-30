@@ -4,6 +4,7 @@
 #include "Text.h"
 
 #include <fstream>
+#include <string>
 using namespace std;
 
 class WriteFile
@@ -13,12 +14,11 @@ class WriteFile
 		bool closed;
 		
 	public:
-	WriteFile* createWriteFile(const char* file_name)
+	WriteFile(const char* file_name)
 	{
-		WriteFile* wf = new WriteFile;
+		WriteFile* wf;
 		wf->output_file.open(file_name);
 		wf->closed = false;
-		return wf;
 	}
 
 	void destroyWriteFile(WriteFile* wf)
@@ -39,10 +39,9 @@ class WriteFile
 	void writeLine(WriteFile* wf, String* line)
 	{
 		if (!wf->closed && line->length() > 0)
-			{
+		{
 			wf->output_file << line->getText() << endl;
-			}
-
+		}
 	}
 };
 
