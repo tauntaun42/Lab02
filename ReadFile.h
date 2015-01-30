@@ -3,57 +3,56 @@
 
 #include "Text.h"
 
+#include <iostream>
 #include <fstream>
 #include <string>
 using namespace std;
 
 class ReadFile{
 
-private:
+protected:
 	ifstream input_file;
 	bool _eof;
 	bool closed;
 	
 public:
+
 	ReadFile(const char* file_name)
 	{
-		ReadFile* rf;
+	   input_file.open(file_name);
+	   closed = false;
+	   _eof = false;
+	}
 
-		rf->input_file.open(file_name);
-		rf->closed = false;
-		rf->_eof = false;
-	}
-	
-	void destroyReadFile(ReadFile* rf)
+	~ReadFile()
 	{
-		close(rf);
-		delete rf;
+	   close();
 	}
-	
-	String* readLine(ReadFile* rf)
+
+	bool eof()
 	{
-	   if (rf->closed) return NULL;
-	   if (rf->_eof) return NULL;
+	   return _eof;
+	}
+
+	void close()
+	{
+	   if (closed)
+	   {
+		  input_file.close();
+		  closed = true;
+	   }
+	}
+
+	String* readLine()
+	{
+	   if (closed) return NULL;
+	   if (_eof) return NULL;
 
 	   string text;
-	   rf->_eof = !(getline(rf->input_file, text));
+	   _eof = !(getline(input_file, text));
 
 	   String* str = new String((const char*) text.c_str());
 	   return str;
-	}
-	
-	bool eof(ReadFile* rf)
-	{
-	   return rf->_eof;
-	}
-	
-	void close(ReadFile* rf)
-	{
-	   if (!rf->closed)
-	   {
-		  rf->input_file.close();
-		  rf->closed = true;
-	   }
 	}
 };
 

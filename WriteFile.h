@@ -4,43 +4,42 @@
 #include "Text.h"
 
 #include <fstream>
-#include <string>
+#include <sstream>
 using namespace std;
 
 class WriteFile
 {
-	private:
-		ofstream output_file;
-		bool closed;
+protected:
+	bool closed;
+	ofstream output_file;
 		
-	public:
+public:
+
 	WriteFile(const char* file_name)
 	{
-		WriteFile* wf;
-		wf->output_file.open(file_name);
-		wf->closed = false;
+		output_file.open(file_name);
+		closed = false;
 	}
 
-	void destroyWriteFile(WriteFile* wf)
+	~WriteFile()
 	{
-		close(wf);
-		delete wf;
+		close();
 	}
 
-	void close(WriteFile* wf)
+	void close()
 	{
-		if (!wf->closed)
+		if (!closed)
 		{
-			wf->output_file.close();
-			wf->closed = true;
+			output_file.close();
+			closed = true;
 		}
 	}
 
-	void writeLine(WriteFile* wf, String* line)
+	void writeLine(String* line)
 	{
-		if (!wf->closed && line->length() > 0)
+		if (!closed && line->length() > 0)
 		{
-			wf->output_file << line->getText() << endl;
+			output_file << line->getText() << endl;
 		}
 	}
 };

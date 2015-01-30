@@ -4,22 +4,26 @@
 #include "Tokens.h"
 
 #include <iostream>
+#include <fstream>
+#include <string>
+
+using namespace std;
 int main()
 {
-   ReadFile* rf = new ReadFile("cds.txt");
-   WriteFile* wf = new WriteFile("out.txt");
+	ReadFile* rf = new ReadFile("cds.txt");
+	WriteFile* wf = new WriteFile("out.txt");
 
-   while(!rf->eof(rf))
-   {
-      String* line = rf->readLine(rf);
-      wf->writeLine(wf, line);
-      delete line;
-   }
+	while(!rf->eof())
+	{
+		String* line = rf->readLine();
+		wf->writeLine(line);
+		delete line;
+	}
 
-   rf->close(rf);
-   wf->close(wf);
-   delete rf;
-   delete wf;
+	rf->close();
+	wf->close();
+	delete rf;
+	delete wf;
 
-   return 0;
+	return 0;
 }
